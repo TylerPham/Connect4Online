@@ -77,29 +77,43 @@ class Account extends CI_Controller {
 	    	$this->form_validation->set_rules('last', 'last', "required");
 	    	$this->form_validation->set_rules('email', 'Email', "required|is_unique[user.email]");
 	    	
-	    
 	    	if ($this->form_validation->run() == FALSE)
 	    	{
 	    		$this->load->view('account/newForm');
 	    	}
 	    	else  
 	    	{
-	    		$user = new User();
-	    		 
-	    		$user->login = $this->input->post('username');
-	    		$user->first = $this->input->post('first');
-	    		$user->last = $this->input->post('last');
-	    		$clearPassword = $this->input->post('password');
-	    		$user->encryptPassword($clearPassword);
-	    		$user->email = $this->input->post('email');
-	    		
-	    		$this->load->model('user_model');
-	    		 
-	    		
-	    		$error = $this->user_model->insert($user);
-	    		
-	    		$this->load->view('account/loginForm');
+
+		    	include_once $_SERVER['DOCUMENT_ROOT'] . '/securimage/securimage.php';
+				$securimage = new Securimage();
+
+				if ($securimage->check($_POST['captcha_code']) == false) {
+				  // the code was incorrect
+
+				  echo "The security code entered was incorrect.<br /><br />";
+				  echo "Please go <a href='javascript:history.go(-1)'>back</a> and try again.";
+				  //$this->load->view('account/newForm');
+				  exit;
+				}
+
+				else{
+		    		$user = new User();
+
+		    		$user->login = $this->input->post('username');
+		    		$user->first = $this->input->post('first');
+		    		$user->last = $this->input->post('last');
+		    		$clearPassword = $this->input->post('password');
+		    		$user->encryptPassword($clearPassword);
+		    		$user->email = $this->input->post('email');
+		    		
+		    		$this->load->model('user_model');
+		    		 
+		    		
+		    		$error = $this->user_model->insert($user);
+		    		
+		    		$this->load->view('account/loginForm');
 	    	}
+	    }
     }
 
     

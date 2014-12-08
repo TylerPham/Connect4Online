@@ -1,0 +1,47 @@
+	.board{
+		background-color: yellow;
+		border: solid black;
+		margin: 10px;
+		margin-top: 100px;
+	}
+
+	.slot{
+		border-radius: 100px;
+		border: 1px solid black;
+		padding: 30px;
+
+	}
+
+	.free_slot{
+		background-color: white;
+	}
+
+	.user_chip{
+		background-color: red;
+	}
+
+	.opp_chip{
+		background-color: black;
+	}
+
+	.curr_token{
+		border-radius: 100px;
+		border: 4px dotted black;
+		padding: 30px;
+		background-color: red;
+	}
+
+	.hover-slot{
+	background-color: white;
+}
+
+	.slot_hover{
+	background-color: white;
+}
+
+#indicator{
+	margin-top: -10px;
+	position: absolute;
+	display: none;
+}
+

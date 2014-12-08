@@ -10,5 +10,9 @@ class Match  {
 	public $user2_id;
 	
 	public $match_status_id = self::ACTIVE;
+
+
+	//Added board_state
+	public $board_state;
 		
 }
